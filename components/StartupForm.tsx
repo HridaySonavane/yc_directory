@@ -11,6 +11,13 @@ import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { createPitch } from "@/lib/actions";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "./ui/select";
 
 const StartupForm = () => {
 	const [errors, setErrors] = useState<Record<string, string>>({});
@@ -124,13 +131,35 @@ const StartupForm = () => {
 				<label htmlFor="category" className="startup-form_label">
 					Category
 				</label>
-				<Input
+				{/* <Input
 					id="category"
 					name="category"
 					className="startup-form_input"
 					required
 					placeholder="Startup Category (Tech, Health, Education...)"
-				/>
+				/> */}
+
+				<Select name="category" required>
+					<SelectTrigger className="startup-form_input">
+						<SelectValue
+							placeholder={
+								<span className="text-black-300">
+									Startup Category (Tech, Health,
+									Education...)
+								</span>
+							}
+						/>
+					</SelectTrigger>
+					<SelectContent
+						id="category"
+						className="startup-form_category"
+					>
+						<SelectItem value="Education">Education</SelectItem>
+						<SelectItem value="Travel">Travel</SelectItem>
+						<SelectItem value="Business">Business</SelectItem>
+						<SelectItem value="Food">Food</SelectItem>
+					</SelectContent>
+				</Select>
 
 				{errors.category && (
 					<p className="startup-form_error">{errors.category}</p>
